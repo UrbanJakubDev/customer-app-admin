@@ -1,8 +1,9 @@
 @import './colors';
+@import './pages/login.scss';
 
 .box {
    background: #fff;
-   border-radius: 0.5rem;
+   border-radius: 1rem;
    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
    padding: 1rem 2rem;
 }
@@ -10,9 +11,12 @@
 .btn {
    background: $primary;
    color: #fff;
-   border-radius: 0.25rem;
-   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-   padding: 1rem;
+   border-radius: 0.5rem;
+   padding: .5rem 1rem;
+   
+   &:hover {
+      background-color: lighten($color: $primary, $amount: 10%);
+   }
 }
 
 img {
@@ -50,3 +54,10 @@ img {
          font-weight: normal;
       }
 }
+
+.user-profile-info-image{
+      //
+}
+
+
+

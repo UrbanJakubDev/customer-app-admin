@@ -5,6 +5,7 @@ import axios from '../../services/axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import formatDate from '../../services/utils'
+import Table from '../../components/baseComponents/Table'
 
 const Customers = () => {
     const [data, setData] = useState([])
@@ -61,6 +62,8 @@ const Customers = () => {
                         ))}
                     </tbody>
                 </table>
+
+                <Table />
             </div>
         )
     }
