@@ -36,6 +36,7 @@ export const useAuth = (props) => {
             .post('/login', login_data)
             .then((res) => {
                 storeToken(res.data['access_token'])
+                return res
             })
             .catch((err) => {
                 if (err.status === 401) {

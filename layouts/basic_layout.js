@@ -10,7 +10,8 @@ const Layout = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const { getToken } = useAuth()
 
-    const handleLogin = () => {
+    // callback function for authentication
+    const handleLoginSubmit = () => {
         setIsLoggedIn(true)
     }
 
@@ -29,7 +30,7 @@ const Layout = (props) => {
     if (!isLoggedIn) {
         return (
             <div className="">
-                <Login onLoginSubmit={handleLogin} />
+                <Login onLoginSubmit={handleLoginSubmit} />
             </div>
         )
     }
