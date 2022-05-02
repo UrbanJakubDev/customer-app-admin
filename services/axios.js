@@ -10,6 +10,8 @@ const axios = Axios.create({
     },
 })
 
+
+
 // Add Bearer token header to every axios requested
 axios.interceptors.request.use(
     (config) => {
@@ -31,11 +33,9 @@ axios.interceptors.response.use(
     },
     (error) => {
         if (error.response.status === 401) {
+            console.log(error.response)
             localStorage.removeItem('token')
-
-            // Redirect to login page
-            redirect('/')
-            window.location.reload()
+            window.location.replace('/login')
 
         }
         return Promise.reject(error)
