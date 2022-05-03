@@ -1,0 +1,22 @@
+// Btn Collors list
+@import "../colors";
+
+.btn {
+  border:none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 0.1rem;
+}
+
+// Create buttons from colors
+@each $color, $value, $key in $btn-colors {
+  .btn-#{$color} {
+    background-color: $value;
+    color: #fff;
+
+      &:hover {
+         background-color: darken($value, 10%);
+      }
+  }
+}
+

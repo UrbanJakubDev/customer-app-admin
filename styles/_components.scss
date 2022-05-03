@@ -1,23 +1,15 @@
 @import './colors';
 @import './pages/login.scss';
 @import './components/table.scss';
+@import './components/customerDetail.scss';
+@import './components/buttons.scss';
+@import './components/navigation.scss';
 
 .box {
    background: #fff;
    border-radius: 1rem;
    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
    padding: 1rem 2rem;
-}
-
-.btn {
-   background: $primary;
-   color: #fff;
-   border-radius: 0.5rem;
-   padding: .5rem 1rem;
-   
-   &:hover {
-      background-color: lighten($color: $primary, $amount: 10%);
-   }
 }
 
 img {
@@ -32,7 +24,7 @@ img {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      margin: 1rem;
 }
 
 .user-profile-info{

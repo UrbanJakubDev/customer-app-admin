@@ -4,17 +4,20 @@ import Link from 'next/link'
 const Nav = () => {
   return (
     <div className="navigation">
-       <Link href="/">
-        <a className="btn">Home</a>
+      <Link href="/">
+        <a className="nav-link">Home</a>
       </Link>
-      <Link className="btn" href="/customers">
-        <a className="btn">Customers</a>
+      |
+      <Link href="/customers">
+        <a className="nav-link">Customers</a>
       </Link>
+      |
       <Link href="/products">
-        <a className="btn">Produkty</a>
+        <a className="nav-link">Produkty</a>
       </Link>
+      |
       <Link href="/purchases">
-        <a className="btn">Nákupy</a>
+        <a className="nav-link">Nákupy</a>
       </Link>
     </div>
   )
