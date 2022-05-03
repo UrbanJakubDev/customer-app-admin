@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from '../../services/axios'
 import formatDate from '../../services/utils'
+import Table from '../../components/baseComponents/Table'
 
 const Purchases = () => {
     const [data, setData] = useState([{}])
@@ -13,6 +14,11 @@ const Purchases = () => {
         })
     }
 
+    const tableHeader = {
+        id: 'ID',
+        ico: 'IČO'
+    }
+
     useEffect(() => {
         getPurchases()
     }, [])
@@ -20,7 +26,9 @@ const Purchases = () => {
     return (
     <div className="align-middle">
         <h2>Nákup</h2>
-            <table className="table table-hover align-middle text-center">
+            <Table tableHeader={tableHeader} tableData={data} />
+
+            {/* <table className="table table-hover align-middle text-center">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -39,7 +47,7 @@ const Purchases = () => {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table> */}
 
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
         </div>

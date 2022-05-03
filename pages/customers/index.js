@@ -18,6 +18,16 @@ const Customers = () => {
         })
     }
 
+    const tableHeader = {
+        id: 'ID',
+        ico: 'IČO',
+        name: 'Jméno',
+        created_at: 'Vytvořeno',
+        updated_at: 'Aktualizováno',
+        is_archived: 'Archivováno'
+
+    }
+
 
     useEffect(() => {
         getUsers()
@@ -26,8 +36,7 @@ const Customers = () => {
     if (data?.length > 0) {
         return (
             <div className="">
-                <h3>Customers</h3>
-                <table className="table table-hover align-middle text-center">
+                {/* <table className="table table-hover align-middle text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -61,9 +70,17 @@ const Customers = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
 
-                <Table />
+                <Table 
+                // Callbac functions
+                updateTable={getUsers} 
+                
+                // Props
+                tableTitle="Zákazníci"
+                tableHeader={tableHeader} 
+                tableData={data} 
+                tabButtons={true}/>
             </div>
         )
     }
