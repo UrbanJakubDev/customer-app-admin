@@ -1,0 +1,50 @@
+@import '../colors';
+
+.detail {
+
+   padding: 1rem 2rem;
+
+  .detail-header {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary;
+    }
+  }
+
+  .detail-body {
+    display: flex;
+    flex-direction: column;
+
+    .detail-form {
+      font-size: 0.8rem;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+  }
+
+  .detail-footer {
+     margin-top: 1rem;
+     text-align: right;
+  }
+
+  label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: gray;
+  }
+
+  input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $primary;
+
+    &:disabled {
+      background-color: transparent;
+      border: none;
+    }
+  }
+}
