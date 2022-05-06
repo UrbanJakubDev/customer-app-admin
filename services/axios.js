@@ -35,7 +35,7 @@ axios.interceptors.response.use(
         if (error.response.status === 401) {
             console.log(error.response)
             localStorage.removeItem('token')
-            window.location.replace('/login')
+            window.location.replace('/')
 
         }
         return Promise.reject(error)
