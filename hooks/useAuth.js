@@ -42,6 +42,10 @@ export const useAuth = (props) => {
                 if (err.status === 401) {
                     alert('Invalid credentials')
                 }
+
+                if (err.status === 404) {
+                    alert('User not found')
+                }
             })
     }
 

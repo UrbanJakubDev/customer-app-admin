@@ -9,7 +9,7 @@ const Nav = () => {
       </Link>
       |
       <Link href="/customers">
-        <a className="nav-link">Customers</a>
+        <a className="nav-link">Zákazníci</a>
       </Link>
       |
       <Link href="/products">

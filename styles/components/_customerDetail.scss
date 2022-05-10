@@ -1,17 +1,28 @@
 @import '../colors';
 
 .detail {
-
-   padding: 1rem 2rem;
+  min-height: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
 
   .detail-header {
     display: flex;
     flex-direction: column;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dotted #ccc;
 
     .title {
       font-size: 1.5rem;
       font-weight: bold;
       color: $primary;
+    }
+
+    .secondary {
+      font-size: 0.9em;
+      color: gray;
     }
   }
 
@@ -20,15 +31,23 @@
     flex-direction: column;
 
     .detail-form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       font-size: 0.8rem;
-      padding-left: 0;
+      padding: 0 auto;
       margin-top: 1rem;
+
+
+      .input-group {
+        width: 25%;
+      }
     }
   }
 
   .detail-footer {
-     margin-top: 1rem;
-     text-align: right;
+    margin-top: 1rem;
+    text-align: right;
   }
 
   label {

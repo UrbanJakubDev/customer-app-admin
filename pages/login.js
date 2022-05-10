@@ -19,6 +19,7 @@ const Login = (props) => {
             props.onLoginSubmit()
         } catch (err) {
             // return error to parent using callback functional
+            console.log(err);
             setLoginErros(err.errors)
         }
     }
@@ -30,8 +31,8 @@ const Login = (props) => {
             </Head>
             <div className="login-wrapper">
                 <div className="login-form">
-                    <span className="title">Vítejtejte,</span>
-                    <span className="secondary">přihlašte se</span>
+                    <span className="title">Vítejte,</span>
+                    <span className="secondary">přihlaste se</span>
                     <form onSubmit={submitForm}>
                         <div className="input-group">
                             <label className="input-label">Email</label>
@@ -45,14 +46,14 @@ const Login = (props) => {
                         <div className="input-group">
                             <label className="input-label">Password</label>
                             <input
-                                placeholder="Password"
+                                placeholder="Heslo"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <button className="btn-login" type="submit">
-                            Login
+                            Přihlásit
                         </button>
                     </form>
                     {loginErros}

@@ -38,6 +38,7 @@ const Layout = (props) => {
     return (
         <div className="page-container">
             <Head>
+                <title>Page Titiel</title>
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"

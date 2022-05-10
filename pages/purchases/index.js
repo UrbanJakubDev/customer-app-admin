@@ -3,55 +3,53 @@ import { useState, useEffect } from 'react'
 import axios from '../../services/axios'
 import formatDate from '../../services/utils'
 import Table from '../../components/baseComponents/Table'
+import Head from 'next/head'
 
 const Purchases = () => {
-    const [data, setData] = useState([{}])
+  const [data, setData] = useState([])
 
-    const getPurchases = () => {
-        axios.get('v1/purchases').then((res) => {
-            setData(res.data)
-            console.log(res.data)
-        })
-    }
+  const tableHeader = {
+    id: 'ID',
+    ico: 'IČO',
+    name: 'Jméno',
+    created_at: 'Vytvořeno',
+    updated_at: 'Aktualizováno',
+    is_archived: 'Archivováno',
+  }
 
-    const tableHeader = {
-        id: 'ID',
-        ico: 'IČO'
-    }
+  const getPurchases = () => {
+    axios.get('v1/purchases').then((res) => {
+      setData(res.data)
+      console.log(res.data)
+    })
+  }
 
-    useEffect(() => {
-        getPurchases()
-    }, [])
+  const archiveRecord = (id) => {
+    console.log(id)
+  }
 
-    return (
-    <div className="align-middle">
-        <h2>Nákup</h2>
-            <Table tableHeader={tableHeader} tableData={data} />
+  useEffect(() => {
+    getPurchases()
+  }, [])
 
-            {/* <table className="table table-hover align-middle text-center">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>ico</th>
-                        <th>datum</th>
-                        <th>nazev</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.ico}</td>
-                            <td>{formatDate(item.created_at)}</td>
-                            <td>{item.customer?.name}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
-
-            {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        </div>
-    )
+  return (
+    <div className="">
+      <Head>
+        <title>Energo plyn | Nákupy</title>
+      </Head>
+      <Table
+        // Callbac functions
+        onUpdateTable={getPurchases}
+        onArchiveRecord={archiveRecord}
+        // Props
+        tableTitle="Nákupy"
+        tableHeader={tableHeader}
+        tableData={data}
+        tabButtons={true}
+        tableDetailRedirect="purchases"
+      />
+    </div>
+  )
 }
 
 export default Purchases
