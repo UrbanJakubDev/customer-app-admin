@@ -29,9 +29,9 @@ const Products = () => {
         return itemFormatted
     })
 
-    useEffect(() => {
-        getProducts()
-    }, [])
+  useEffect(() => {
+    getProducts()
+  }, [])
 
     return (
         <div className="align-middle">
