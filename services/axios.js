@@ -32,6 +32,14 @@ axios.interceptors.response.use(
         return response
     },
     (error) => {
+        
+        if (error.response === undefined) {
+            localStorage.removeItem('token')
+            return Promise.reject(error)
+            //window.location.replace('/login');
+        }
+
+
         if (error.response.status === 401) {
             console.log(error.response)
             localStorage.removeItem('token')

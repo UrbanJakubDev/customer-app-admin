@@ -19,6 +19,7 @@ const Login = (props) => {
             props.onLoginSubmit()
         } catch (err) {
             // return error to parent using callback functional
+            console.log(err);
             setLoginErros(err.errors)
         }
     }
