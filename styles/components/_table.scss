@@ -1,30 +1,32 @@
 .data-table-wrapper {
-   width: 100%;
-   height: 100%;
-   position: relative;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .data-table-scroll {
-   height:150px;
-   overflow:auto;  
-   margin-top:20px;
- }
-
+  height: 150px;
+  overflow: auto;
+  margin-top: 20px;
+}
 
 .data-table {
-   font-size: .8rem;
-   width: 100%;
-    border-top: 1px solid rgb(180, 180, 180);
-   position: relative;
+  font-size: 0.8rem;
+  width: 100%;
+  border-top: 1px solid rgb(180, 180, 180);
+  position: relative;
 
-    table {
+  table {
+    table-layout: fixed;
 
-        table-layout: fixed;
-
-        td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    thead {
+      text-align: left;
     }
+
+    td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }

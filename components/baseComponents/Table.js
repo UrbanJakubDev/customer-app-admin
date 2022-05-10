@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from '../../services/axios'
 import formatDate from '../../services/utils'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 const Table = (props) => {
   const tableHeader = props.tableHeader
@@ -9,16 +10,16 @@ const Table = (props) => {
   const tabButtons = props.tabButtons
   const tableTitle = props.tableTitle ? props.tableTitle : 'Tabulka'
   const hideNullValues = props.hideNullValues ? props.hideNullValues : false
+  const tableDetailRedirect = props.tableDetailRedirect ? props.tableDetailRedirect : '/'
 
   const itemActionButtons = (id) => {
     return (
       <>
-        <th>
-          <Link href={`/customers/[id]`} as={`/customers/${id}`}>
-            <a>E</a>
+        <th key={id}>
+          <Link href={`/${tableDetailRedirect}/[id]`} as={`/${tableDetailRedirect}/${id}`}>
+            <a><AiOutlineEdit /></a>
           </Link>
         </th>
-        <th>X</th>
       </>
     )
   }
@@ -40,23 +41,16 @@ const Table = (props) => {
     // Create table rows for each data item
     const tableDataElements = data.map((item) => {
       const tableRowElements = Object.keys(tableHeader).map((key) => {
-        // If the value is null and hideNullValues is true, don't display the value
-        if (hideNullValues && item[key] === null) {
-          return null
-        }
-
         // If the value is a date, format it
         if (key === 'created_at' || key === 'updated_at') {
           return <td key={key}>{formatDate(item[key])}</td>
         }
-
         return <td key={key}>{item[key]}</td>
       })
 
       if (tabButtons) {
         tableRowElements.push(itemActionButtons(item['id']))
       }
-
       return <tr key={item.id}>{tableRowElements}</tr>
     })
     return tableDataElements
@@ -79,15 +73,6 @@ const Table = (props) => {
     }
     return itemFormatted
   })
-
-  // TODO: Move to parent
-  // Function to archive customer information
-  const archiveCustomer = (customer) => {
-    customer.is_archived = !customer.is_archived
-    axios.put(`v1/customers/${customer.id}/edit`, customer).then((res) => {
-      props.updateTable()
-    })
-  }
 
   return (
     <div className="data-table-wrapper">
