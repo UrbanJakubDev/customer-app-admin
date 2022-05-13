@@ -2,7 +2,7 @@
 
 .detail {
   min-height: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -10,9 +10,15 @@
 
   .detail-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 0.5rem;
     border-bottom: 1px dotted #ccc;
+  }
+
+  .detail-header-info {
+    display: flex;
+    flex-direction: column;
 
     .title {
       font-size: 1.5rem;
@@ -45,7 +51,7 @@
     }
   }
 
-  .detail-footer {
+  .detail-header-buttons {
     margin-top: 1rem;
     text-align: right;
   }

@@ -11,7 +11,6 @@ const Products = () => {
   const tableHeader = {
     id: 'ID',
     created_at: 'Vytvořeno',
-    updated_at: 'Aktualizováno',
     ico: 'IČO',
     year: 'Rok',
     note: 'Note',

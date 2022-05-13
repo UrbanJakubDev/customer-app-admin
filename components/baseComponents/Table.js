@@ -7,7 +7,9 @@ import { AiOutlineEdit } from 'react-icons/ai'
 const Table = (props) => {
   const tableHeader = props.tableHeader
   const tableData = props.tableData
-  const tabButtons = props.tabButtons
+
+  // Tab buttonst if not props then true
+  const tabButtons = !props.tabButtons ? props.tabButtons : true
   const tableTitle = props.tableTitle ? props.tableTitle : 'Tabulka'
   const hideNullValues = props.hideNullValues ? props.hideNullValues : false
   const tableDetailRedirect = props.tableDetailRedirect ? props.tableDetailRedirect : '/'
@@ -45,6 +47,12 @@ const Table = (props) => {
         if (key === 'created_at' || key === 'updated_at') {
           return <td key={key}>{formatDate(item[key])}</td>
         }
+
+        // If key is trader, render trader.name
+        if (key === 'trader') {
+          return <td key={key}>{item[key]['subject_name']}</td>
+        }
+
         return <td key={key}>{item[key]}</td>
       })
 
