@@ -11,43 +11,42 @@ const DetailButtons = (props) => {
     setIsEditable(!isEditable)
   }
 
-  // Save button
+  // Save span
   const handleSave = () => {
     props.onSave()
     setIsEditable(false)
   }
 
   return (
-    <div>
-      <button
-        type="button"
-        className={"btn btn-primary " + (!isEditable ? ' hidden' : '')}
+    <>
+      <span
+        type="span"
+        className={"action-btn" + (!isEditable ? ' hidden' : '')}
         onClick={() => {
           handleSave()
         }}
       >
         Uložit
-      </button>
+      </span>
 
-      <button
-        type="button"
-        className="btn btn-default"
+      <span
+        className={"action-btn" + (!isEditable ? ' edit' : '')}
         onClick={() => {
           handleEditable()
         }}
       >
         {isEditable ? 'Zavřít' : 'Upravit'}
-      </button>
+      </span>
 
-      <button
-        className="btn btn-default"
+      <span
+        className="action-btn"
         onClick={() => {
           router.back()
         }}
       >
         Zpět
-      </button>
-    </div>
+      </span>
+    </>
   )
 }
 

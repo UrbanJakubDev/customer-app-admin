@@ -23,14 +23,14 @@ const RecordDetail = (props) => {
   }
 
   return (
-    <div className="detail">
+    <div className="detail box">
       <div className="detail-header">
         <section className="detail-header-info">
-          <span className="title">Detail | {formData.name}</span>
+          <span className="title">{formData.name}</span>
           <small className="secondary">ID: {formData.id}</small>
           <small>Poslední změna:{formatDate(formData.updated_at)}</small>
         </section>
-        <section className="detail-header-buttons">
+        <section className="detail-header-actions">
           <DetailButtons onEdit={handleEdit} onSave={handleSave} />
         </section>
       </div>
