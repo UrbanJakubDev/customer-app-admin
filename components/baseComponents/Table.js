@@ -12,14 +12,21 @@ const Table = (props) => {
   const tabButtons = !props.tabButtons ? props.tabButtons : true
   const tableTitle = props.tableTitle ? props.tableTitle : 'Tabulka'
   const hideNullValues = props.hideNullValues ? props.hideNullValues : false
-  const tableDetailRedirect = props.tableDetailRedirect ? props.tableDetailRedirect : '/'
+  const tableDetailRedirect = props.tableDetailRedirect
+    ? props.tableDetailRedirect
+    : '/'
 
   const itemActionButtons = (id) => {
     return (
       <>
         <th key={id}>
-          <Link href={`/${tableDetailRedirect}/[id]`} as={`/${tableDetailRedirect}/${id}`}>
-            <a><AiOutlineEdit /></a>
+          <Link
+            href={`/${tableDetailRedirect}/[id]`}
+            as={`/${tableDetailRedirect}/${id}`}
+          >
+            <a className="icon">
+              <AiOutlineEdit />
+            </a>
           </Link>
         </th>
       </>
@@ -48,9 +55,29 @@ const Table = (props) => {
           return <td key={key}>{formatDate(item[key])}</td>
         }
 
+        if (key === 'name') {
+          return (
+            <td className="align-left" key={key}>
+              {item[key]}
+            </td>
+          )
+        }
+
         // If key is trader, render trader.name
         if (key === 'trader') {
-          return <td key={key}>{item[key]['subject_name']}</td>
+          return (
+            <td className="align-left" key={key}>
+              {item[key]['subject_name']}
+            </td>
+          )
+        }
+
+        if (key === 'customer') {
+          return (
+            <td className="align-left" key={key}>
+              {item[key]=== undefined ? '' : item[key]['name']}
+            </td>
+          )
         }
 
         return <td key={key}>{item[key]}</td>
@@ -83,8 +110,8 @@ const Table = (props) => {
   })
 
   return (
-    <div className="data-table-wrapper">
-      <h3>{tableTitle}</h3>
+    <div className="data-table-wrapper box">
+      <h3 className="data-table-title">{tableTitle}</h3>
       <table className="data-table">
         <thead>
           <tr>{makeTableHeader()}</tr>

@@ -1,6 +1,9 @@
 import Head from 'next/head'
 
 export default function Home() {
+
+
+
     return (
         <div className="flex justify-start flex-col">
             <Head>
@@ -14,7 +17,7 @@ export default function Home() {
 
             <section className="min-h-max">
                 <h1>
-                    Welcome to <a href="https://nextjs.org">Next.js!</a>
+                    Už ti bylo smutno Mrdko?
                 </h1>
             </section>
             <section>

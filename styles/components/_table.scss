@@ -11,22 +11,40 @@
 }
 
 .data-table {
+  font-family:'Oxygen Mono';
   font-size: 0.8rem;
   width: 100%;
   border-top: 1px solid rgb(180, 180, 180);
   position: relative;
 
-  table {
-    table-layout: fixed;
+}
 
-    thead {
-      text-align: left;
-    }
+.data-table-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: $primary;
+  margin: .5rem 0;
+}
 
-    td {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+td, th {
+  text-align: center;
+  word-break: break-word;
+
+  max-width: 3rem;
+}
+
+.icon {
+  font-size: 1.2rem;
+
+  &:hover {
+    color: $primary;
   }
+}
+
+.aligin-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
 }

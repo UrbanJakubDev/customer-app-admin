@@ -11,10 +11,10 @@ const Purchases = () => {
   const tableHeader = {
     id: 'ID',
     ico: 'IČO',
-    name: 'Jméno',
     created_at: 'Vytvořeno',
     updated_at: 'Aktualizováno',
     is_archived: 'Archivováno',
+    customer: 'Zákazník'
   }
 
   const getPurchases = () => {
