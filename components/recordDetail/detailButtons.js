@@ -41,7 +41,7 @@ const DetailButtons = (props) => {
       <span
         className="action-btn"
         onClick={() => {
-          router.back()
+          router.push('/customers')
         }}
       >
         Zpět
