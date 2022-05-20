@@ -3,18 +3,29 @@ import { useRouter } from 'next/router'
 import axios from '../../services/axios'
 import RecordDetail from '../../components/recordDetail/index'
 import Table from '../../components/baseComponents/table'
+import BarChart from '../../components/baseComponents/Chart'
+import Widget from '../../components/baseComponents/Widget'
+import ToogleSwitch from '../../components/baseComponents/Switch'
+import Link from 'next/link'
 
 const Customer = (props) => {
   const router = useRouter()
+  const id = router.query.id
+
+  // Data for change year
+  const [dataYear, setDataYear] = useState('all')
+
+  // Raw data from the API
   const [customerData, setCustomerData] = useState([])
   const [customerProducts, setCustomerProducts] = useState([])
   const [customerPurchases, setCustomerPurchases] = useState([])
+
+  // Filtered data for the table
   const [filteredCustomerPurchases, setFilteredCustomerPurchases] = useState([])
+
+  // Filtered data for widget
   const [purchasesSum, setPurchasesSum] = useState([])
   const [purchasesTotal, setPurchasesTotal] = useState([])
-  const [dataYear, setDataYear] = useState('all')
-
-  const id = router.query.id
 
   const productsHeader = {
     id: 'ID',
@@ -41,20 +52,27 @@ const Customer = (props) => {
     cal_pur_date: 'Pur Date',
   }
 
+  // Fetch data from server API
+
+  // Fetch customer from API server
   const loadCustomer = async (id) => {
-    const res = await axios.get(`/v1/customers/${id}`)
-    setCustomerData(res.data)
+    await axios.get(`/v1/customers/${id}`).then((res) => {
+      setCustomerData(res.data)
+    })
   }
 
+  // Fetch customer products from API server
   const loadCustomerProducsts = async (id) => {
-    const res = await axios.get(`/v1/customers/${id}/products`)
-    console.log(res.data)
-    setCustomerProducts(res.data)
+    await axios.get(`/v1/customers/${id}/products`).then((res) => {
+      setCustomerProducts(res.data)
+    })
   }
 
+  // Fetch customer purchases from API server
   const loadCustomerPurchases = async (id) => {
     const res = await axios.get(`/v1/customers/${id}/purchases`)
     setCustomerPurchases(res.data)
+
     let filteredData = await filterTableByYear(res.data, dataYear)
     setFilteredCustomerPurchases(filteredData)
 
@@ -63,25 +81,25 @@ const Customer = (props) => {
     setPurchasesSum(total)
   }
 
+  // Update customer data
   const saveCustomer = async (customer) => {
-    const res = await axios.put(`/v1/customers/${customer.id}/edit`, customer)
-    setCustomerData(res.data.customer)
+    await axios
+      .put(`/v1/customers/${customer.id}/edit`, customer)
+      .then((res) => {
+        setCustomerData(res.data.customer)
+      })
   }
 
   // Filter customerPurchases by year
   const filterTableByYear = (data, year) => {
-    // convert yeat to integer
-    if (year === 'all') {
-      return data
-    } else {
-      year = parseInt(year)
-      return data.filter((item) => item.year === year)
+    if (year !== 'all'){
+      return data.filter(item => item.year === parseInt(year))
     }
+    return data
   }
 
-  // For every key in the customerPurchases reduce attribute value to the sum of all values
-  const getTotalPurchases = (data) => {
-    // Remove keys 'created_at', 'updated_at', 'id' from data
+  // Remove unnecessary keys from RAW data
+  const removeNoDataItems = (data) => {
     let filteredData = data.map((purchase) => {
       let newPurchase = {}
       for (let key in purchase) {
@@ -104,6 +122,23 @@ const Customer = (props) => {
       }
       return newPurchase
     })
+    return filteredData
+  }
+
+  // Sum all columns in table
+  const getTotalData = (data) => {
+    return data.reduce(
+      (r, o) => (
+        Object.entries(o).forEach(([k, v]) => (r[k] = (r[k] || 0) + v)), r
+      ),
+      {}
+    )
+  }
+
+  // For every key in the customerPurchases reduce attribute value to the sum of all values
+  const getTotalPurchases = (data) => {
+    // Remove keys 'created_at', 'updated_at', 'id' from data
+    let filteredData = removeNoDataItems(data)
 
     return filteredData.reduce(
       (r, o) => (
@@ -154,9 +189,16 @@ const Customer = (props) => {
 
   return (
     <>
-      <div className="box">
-        <pre>{JSON.stringify(purchasesSum, null, 2)}</pre>
+      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} />
 
+      <Link href={`/customers/${id}/#products`} >Products</Link>
+      <Link href={`/customers/${id}/#purchases`} >Nakupy</Link>
+
+      {/* <div className="box">
+        <pre>{JSON.stringify(purchasesSum, null, 2)}</pre>
+      </div> */}
+
+      <div className="box">
         <div>
           <select
             className="custom-select"
@@ -170,33 +212,40 @@ const Customer = (props) => {
             <option value="2020">2020</option>
           </select>
         </div>
+        Widgets
+        <div className="widget-box">
+          <Widget title="Produkt Cal" data={purchasesSum.pm1q} />
+          <Widget title="Produkt M" data={purchasesSum.pm2q} />
+          <Widget title="Produkt Q" data={purchasesSum.pm3q} />
+          <Widget title="Produkt SPOT" data={purchasesSum.pm4q} />
+        </div>
+        <h3>Charts</h3>
+        <BarChart />
       </div>
 
-      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} />
-
-      
-        {customerProducts.length > 0 ? (
-          <Table
-            tableData={customerProducts}
-            tableHeader={productsHeader}
-            tableTitle="Produkty"
-            tableDetailRedirect="products"
-            tabButtons={true}
-          />
-        ) : (
-          'No products'
-        )}
-        {filteredCustomerPurchases.length > 0 ? (
-          <Table
-            tableData={filteredCustomerPurchases}
-            tableHeader={purchasesHeader}
-            tableTitle="Nákupy"
-            tableDetailRedirect="purchases"
-            tabButtons={true}
-          />
-        ) : (
-          'No Purchases'
-        )}
+      {customerProducts.length > 0 ? (
+        <Table
+          tableData={customerProducts}
+          tableHeader={productsHeader}
+          tableTitle="Produkty"
+          tableDetailRedirect="products"
+          tabButtons={true}
+        />
+      ) : (
+        null
+      )}
+      {filteredCustomerPurchases.length > 0 ? (
+        <Table
+          
+          tableData={filteredCustomerPurchases}
+          tableHeader={purchasesHeader}
+          tableTitle="Nákupy"
+          tableDetailRedirect="purchases"
+          tabButtons={true}
+        />
+      ) : (
+        null
+      )}
     </>
   )
 }
