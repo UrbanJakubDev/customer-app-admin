@@ -3,6 +3,7 @@ import Link from 'next/link'
 import axios from '../../services/axios'
 import formatDate from '../../services/utils'
 import { AiOutlineEdit } from 'react-icons/ai'
+import ToogleSwitch from '../baseComponents/Switch'
 
 const Table = (props) => {
   const tableHeader = props.tableHeader
@@ -41,7 +42,7 @@ const Table = (props) => {
     })
 
     if (tabButtons) {
-      tableHeaderElements.push(<th key="tab-buttons">Actions</th>)
+      tableHeaderElements.push(<th key="tab-buttons">Detail</th>)
     }
     return tableHeaderElements
   }
@@ -75,7 +76,7 @@ const Table = (props) => {
         if (key === 'customer') {
           return (
             <td className="align-left" key={key}>
-              {item[key]=== undefined ? '' : item[key]['name']}
+              {item[key] === undefined ? '' : item[key]['name']}
             </td>
           )
         }
@@ -110,8 +111,11 @@ const Table = (props) => {
   })
 
   return (
-    <div className="data-table-wrapper box">
-      <h3 className="data-table-title">{tableTitle}</h3>
+    <div id={tableDetailRedirect} className="data-table-wrapper box">
+      <div className="tab-header">
+        <h3 className="data-table-title">{tableTitle}</h3>
+        <ToogleSwitch />
+      </div>
       <table className="data-table">
         <thead>
           <tr>{makeTableHeader()}</tr>

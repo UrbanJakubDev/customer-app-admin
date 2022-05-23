@@ -5,7 +5,7 @@ export default function Home() {
 
 
     return (
-        <div className="flex justify-start flex-col">
+        <div className="">
             <Head>
                 <title>Energo Plyn | Home</title>
                 <meta
@@ -15,7 +15,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <section className="min-h-max">
+            <section className="box">
                 <h1>
                     Už ti bylo smutno Mrdko?
                 </h1>
