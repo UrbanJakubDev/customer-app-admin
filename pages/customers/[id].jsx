@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from '../../services/axios'
 import RecordDetail from '../../components/recordDetail/index'
-import Table from '../../components/baseComponents/table'
-import BarChart from '../../components/baseComponents/Chart'
-import Widget from '../../components/baseComponents/Widget'
-import ToogleSwitch from '../../components/baseComponents/Switch'
+import Table from '../../components/baseComponents/Table'
 import Link from 'next/link'
 
 const Customer = (props) => {
@@ -90,10 +87,12 @@ const Customer = (props) => {
       })
   }
 
+
+
   // Filter customerPurchases by year
   const filterTableByYear = (data, year) => {
-    if (year !== 'all'){
-      return data.filter(item => item.year === parseInt(year))
+    if (year !== 'all') {
+      return data.filter((item) => item.year === parseInt(year))
     }
     return data
   }
@@ -181,22 +180,54 @@ const Customer = (props) => {
     refresh(filteredData)
   }
 
+
+
   useEffect(() => {
     loadCustomer(id)
     loadCustomerProducsts(id)
     loadCustomerPurchases(id)
   }, [])
 
+
+
+  // Make form body
+  const makeFormBody = (data) => {
+    return (
+      <div className="form-body">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-group">
+              <label>IČO</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="IČO"
+                value={data.ico}
+                onChange={(e) => setCustomerData({ ...data, ico: e.target.value })}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group">
+              <label>Název</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Název"
+                value={data.name}
+                onChange={(e) => setCustomerData({ ...data, name: e.target.value })}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
   return (
     <>
-      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} />
-
-      <Link href={`/customers/${id}/#products`} >Products</Link>
-      <Link href={`/customers/${id}/#purchases`} >Nakupy</Link>
-
-      {/* <div className="box">
-        <pre>{JSON.stringify(purchasesSum, null, 2)}</pre>
-      </div> */}
+      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} formBody={makeFormBody(customerData)} />
 
       <div className="box">
         <div>
@@ -212,15 +243,6 @@ const Customer = (props) => {
             <option value="2020">2020</option>
           </select>
         </div>
-        Widgets
-        <div className="widget-box">
-          <Widget title="Produkt Cal" data={purchasesSum.pm1q} />
-          <Widget title="Produkt M" data={purchasesSum.pm2q} />
-          <Widget title="Produkt Q" data={purchasesSum.pm3q} />
-          <Widget title="Produkt SPOT" data={purchasesSum.pm4q} />
-        </div>
-        <h3>Charts</h3>
-        <BarChart />
       </div>
 
       {customerProducts.length > 0 ? (
@@ -231,21 +253,16 @@ const Customer = (props) => {
           tableDetailRedirect="products"
           tabButtons={true}
         />
-      ) : (
-        null
-      )}
+      ) : null}
       {filteredCustomerPurchases.length > 0 ? (
         <Table
-          
           tableData={filteredCustomerPurchases}
           tableHeader={purchasesHeader}
           tableTitle="Nákupy"
           tableDetailRedirect="purchases"
           tabButtons={true}
         />
-      ) : (
-        null
-      )}
+      ) : null}
     </>
   )
 }

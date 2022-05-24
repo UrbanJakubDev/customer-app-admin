@@ -62,6 +62,8 @@ const RecordDetail = (props) => {
               )
             })
           }
+
+          {props.formBody}
         </form>
       </section>
     </div>
