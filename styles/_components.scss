@@ -4,12 +4,14 @@
 @import './components/customerDetail.scss';
 @import './components/buttons.scss';
 @import './components/navigation.scss';
+@import './components/toogleSwitch.scss';
 
 .box {
    background: #fff;
    border-radius: 1rem;
    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
    padding: 1rem 2rem;
+   margin-bottom: 1.3rem;
 }
 
 img {

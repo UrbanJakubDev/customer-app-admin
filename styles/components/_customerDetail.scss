@@ -2,7 +2,7 @@
 
 .detail {
   min-height: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -10,9 +10,16 @@
 
   .detail-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding-bottom: 0.5rem;
     border-bottom: 1px dotted #ccc;
+  }
+
+  .detail-header-info {
+    display: flex;
+    flex-direction: column;
 
     .title {
       font-size: 1.5rem;
@@ -26,6 +33,26 @@
     }
   }
 
+  .detail-header-actions {
+    margin-top: 2.5rem;
+    text-align: right;
+
+    .action-btn {
+      // Text upper case
+      text-transform: uppercase;
+      font-size: 80%;
+      margin-left: 1rem;
+
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        color: $primary;
+        border-bottom: 2px solid $primary;
+      }
+    }
+  }
+
   .detail-body {
     display: flex;
     flex-direction: column;
@@ -33,21 +60,16 @@
     .detail-form {
       display: flex;
       flex-direction: row;
+      justify-content: flex-start;
       flex-wrap: wrap;
       font-size: 0.8rem;
-      padding: 0 auto;
+      padding-left: 0;
       margin-top: 1rem;
-
 
       .input-group {
         width: 25%;
       }
     }
-  }
-
-  .detail-footer {
-    margin-top: 1rem;
-    text-align: right;
   }
 
   label {
@@ -57,7 +79,7 @@
   }
 
   input {
-    background-color: transparent;
+    background-color: lightgrey;
     border: none;
     border-bottom: 1px solid $primary;
 

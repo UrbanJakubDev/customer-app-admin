@@ -47,7 +47,7 @@ const Layout = (props) => {
             <header className="box">
                 <Navigation />
             </header>
-            <main className="box">{props.children}</main>
+            <main className="">{props.children}</main>
             <footer className="box">
                 <a href="#" onClick={handleLogout}>
                     Logout

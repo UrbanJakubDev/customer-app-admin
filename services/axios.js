@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const axios = Axios.create({
-    baseURL: 'http://localhost/api',
+    baseURL: "https://plyn.cezenergo.cz/api/",
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -36,15 +36,12 @@ axios.interceptors.response.use(
         if (error.response === undefined) {
             localStorage.removeItem('token')
             return Promise.reject(error)
-            //window.location.replace('/login');
         }
 
-
-        if (error.response.status === 401) {
+        if (error.response.status === 401 || error.response.status === 403) {
             console.log(error.response)
             localStorage.removeItem('token')
             window.location.replace('/')
-
         }
         return Promise.reject(error)
     }

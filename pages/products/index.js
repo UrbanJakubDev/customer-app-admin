@@ -11,18 +11,22 @@ const Products = () => {
   const tableHeader = {
     id: 'ID',
     created_at: 'Vytvořeno',
-    updated_at: 'Aktualizováno',
     ico: 'IČO',
     year: 'Rok',
     note: 'Note',
+    customer_id: 'customer_id',
+    customer: 'Zákazník',
   }
 
-  const tableDetailRedirect = "/products"
+  const tableDetailRedirect = "products"
 
   const getProducts = () => {
-    axios.get('v1/products').then((res) => {
-      setData(res.data)
+    let params = {
+    }
+
+    axios.get('v1/products', {params}).then((res) => {
       console.log(res.data)
+      setData(res.data)
     })
   }
 

@@ -16,15 +16,14 @@ const Customers = () => {
     id: 'ID',
     ico: 'IČO',
     name: 'Jméno',
-    created_at: 'Vytvořeno',
-    updated_at: 'Aktualizováno',
+    products_count: 'Počet produktů',
+    purchases_count: 'Počet nákupů',
     is_archived: 'Archivováno',
   }
 
   const getUsers = () => {
     axios.get('v1/customers').then((res) => {
       setData(res.data)
-      console.log(res.data)
     })
   }
 

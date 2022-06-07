@@ -1,23 +1,33 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from '../../services/axios'
-import formatDate from '../../services/utils'
+import {formatDate} from '../../services/utils.ts'
 import { AiOutlineEdit } from 'react-icons/ai'
+import ToogleSwitch from '../baseComponents/Switch'
 
 const Table = (props) => {
   const tableHeader = props.tableHeader
   const tableData = props.tableData
-  const tabButtons = props.tabButtons
+
+  // Tab buttonst if not props then true
+  const tabButtons = !props.tabButtons ? props.tabButtons : true
   const tableTitle = props.tableTitle ? props.tableTitle : 'Tabulka'
   const hideNullValues = props.hideNullValues ? props.hideNullValues : false
-  const tableDetailRedirect = props.tableDetailRedirect ? props.tableDetailRedirect : '/'
+  const tableDetailRedirect = props.tableDetailRedirect
+    ? props.tableDetailRedirect
+    : '/'
 
   const itemActionButtons = (id) => {
     return (
       <>
         <th key={id}>
-          <Link href={`/${tableDetailRedirect}/[id]`} as={`/${tableDetailRedirect}/${id}`}>
-            <a><AiOutlineEdit /></a>
+          <Link
+            href={`/${tableDetailRedirect}/[id]`}
+            as={`/${tableDetailRedirect}/${id}`}
+          >
+            <a className="icon">
+              <AiOutlineEdit />
+            </a>
           </Link>
         </th>
       </>
@@ -32,7 +42,7 @@ const Table = (props) => {
     })
 
     if (tabButtons) {
-      tableHeaderElements.push(<th key="tab-buttons">Actions</th>)
+      tableHeaderElements.push(<th key="tab-buttons">Detail</th>)
     }
     return tableHeaderElements
   }
@@ -45,6 +55,32 @@ const Table = (props) => {
         if (key === 'created_at' || key === 'updated_at') {
           return <td key={key}>{formatDate(item[key])}</td>
         }
+
+        if (key === 'name') {
+          return (
+            <td className="align-left" key={key}>
+              {item[key]}
+            </td>
+          )
+        }
+
+        // If key is trader, render trader.name
+        if (key === 'trader') {
+          return (
+            <td className="align-left" key={key}>
+              {item[key]['subject_name']}
+            </td>
+          )
+        }
+
+        if (key === 'customer') {
+          return (
+            <td className="align-left" key={key}>
+              {item[key] === undefined ? '' : item[key]['name']}
+            </td>
+          )
+        }
+
         return <td key={key}>{item[key]}</td>
       })
 
@@ -75,8 +111,11 @@ const Table = (props) => {
   })
 
   return (
-    <div className="data-table-wrapper">
-      <h3>{tableTitle}</h3>
+    <div id={tableDetailRedirect} className="data-table-wrapper box">
+      <div className="tab-header">
+        <h3 className="data-table-title">{tableTitle}</h3>
+        <ToogleSwitch />
+      </div>
       <table className="data-table">
         <thead>
           <tr>{makeTableHeader()}</tr>
