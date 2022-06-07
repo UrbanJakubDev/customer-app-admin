@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from '../../services/axios'
-import formatDate from '../../services/utils'
+import {formatDate} from '../../services/utils.ts'
 import { AiOutlineEdit } from 'react-icons/ai'
 import ToogleSwitch from '../baseComponents/Switch'
 

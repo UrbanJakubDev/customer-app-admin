@@ -24,7 +24,6 @@ const Customers = () => {
   const getUsers = () => {
     axios.get('v1/customers').then((res) => {
       setData(res.data)
-      console.log(res.data)
     })
   }
 

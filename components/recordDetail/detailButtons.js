@@ -20,7 +20,6 @@ const DetailButtons = (props) => {
   return (
     <>
       <span
-        type="span"
         className={"action-btn" + (!isEditable ? ' hidden' : '')}
         onClick={() => {
           handleSave()

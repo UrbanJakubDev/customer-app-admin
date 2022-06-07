@@ -4,8 +4,11 @@ import axios from '../../services/axios'
 import RecordDetail from '../../components/recordDetail/index'
 import Table from '../../components/baseComponents/Table'
 import Link from 'next/link'
+import ICustomer from '../../interfaces/interfaces'
 
-const Customer = (props) => {
+
+
+const Customer = () => {
   const router = useRouter()
   const id = router.query.id
 
@@ -186,48 +189,13 @@ const Customer = (props) => {
     loadCustomer(id)
     loadCustomerProducsts(id)
     loadCustomerPurchases(id)
+    
   }, [])
-
-
-
-  // Make form body
-  const makeFormBody = (data) => {
-    return (
-      <div className="form-body">
-        <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
-              <label>IČO</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="IČO"
-                value={data.ico}
-                onChange={(e) => setCustomerData({ ...data, ico: e.target.value })}
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label>Název</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Název"
-                value={data.name}
-                onChange={(e) => setCustomerData({ ...data, name: e.target.value })}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
 
   return (
     <>
-      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} formBody={makeFormBody(customerData)} />
+      <RecordDetail inputData={customerData} onHandleSave={saveCustomer} />
 
       <div className="box">
         <div>
