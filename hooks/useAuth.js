@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 export const useAuth = (props) => {
     const [accessToken, setAccessToken] = useState(null)
 
-    const csrf = () => axios.get('http://localhost/sanctum/csrf-cookie')
+    const csrf = () => axios.get('/sanctum/csrf-cookie')
 
     const storeToken = (token) => {
         setAccessToken(token)
