@@ -17,7 +17,7 @@ export default function Home() {
 
             <section className="box">
                 <h1>
-                    Už ti bylo smutno Mrdko?
+                    Some text...
                 </h1>
             </section>
             <section>
